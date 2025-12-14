@@ -1,13 +1,36 @@
 <template>
     <div>
-        <UButton color="primary" variant="subtle">Hello World!</UButton>
+        <!-- Hero Section -->
+        <LandingHero />
+
+        <!-- Feature Section -->
+        <LandingFeature />
+
+        <!-- How It Works Section -->
+        <LandingHowitwork />
+
+        <!-- Community Section -->
+        <LandingComunity />
+
+        <!-- Testimonials Section -->
+        <LandingTestimonials />
+
+        <!-- CTA Section -->
+        <LandingCTA />
     </div>
 </template>
 
 <script setup lang="ts">
-
+useHead({
+    title: "DreamBuddy - Turn Your Dreams Into Reality",
+    meta: [
+        {
+            name: "description",
+            content:
+                "Track your savings goals, share with the community, and turn your dreams into reality. Join thousands of users saving smarter with DreamBuddy.",
+        },
+    ],
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
