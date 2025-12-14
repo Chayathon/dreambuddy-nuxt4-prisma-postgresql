@@ -10,7 +10,7 @@
         <LandingHowitwork />
 
         <!-- Community Section -->
-        <LandingComunity />
+        <LandingCommunity />
 
         <!-- Testimonials Section -->
         <LandingTestimonials />
