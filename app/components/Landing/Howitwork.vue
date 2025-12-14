@@ -17,20 +17,20 @@
             <!-- Section Header -->
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <UBadge color="primary" variant="subtle" size="lg" class="mb-4">
-                    How It Works
+                    {{ $t("howItWorks.badge") }}
                 </UBadge>
                 <h2
                     class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight"
                 >
-                    Simple Steps to
+                    {{ $t("howItWorks.title") }}
                     <span
                         class="block bg-linear-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent"
                     >
-                        Reach Your Dreams
+                        {{ $t("howItWorks.titleHighlight") }}
                     </span>
                 </h2>
                 <p class="text-lg text-gray-600 dark:text-gray-300">
-                    Start saving smarter in just 4 easy steps.
+                    {{ $t("howItWorks.subtitle") }}
                 </p>
             </div>
 
@@ -76,7 +76,7 @@
                                         <div
                                             class="w-14 h-14 rounded-xl flex items-center justify-center"
                                             :class="{
-                                                'bg-secondary-100 dark:bg-secondary-900/30':
+                                                'bg-secondary-100 dark:bg-primary-900/30':
                                                     step.color === 'secondary',
                                                 'bg-success-100 dark:bg-success-900/30':
                                                     step.color === 'success',
@@ -90,7 +90,7 @@
                                                 :name="step.icon"
                                                 class="w-7 h-7"
                                                 :class="{
-                                                    'text-secondary-600 dark:text-secondary-400':
+                                                    'text-secondary-600 dark:text-primary-400':
                                                         step.color ===
                                                         'secondary',
                                                     'text-success-600 dark:text-success-400':
@@ -129,7 +129,7 @@
             <!-- Bottom CTA -->
             <div class="text-center mt-16">
                 <p class="text-gray-600 dark:text-gray-300 mb-6">
-                    Ready to start your journey?
+                    {{ $t("howItWorks.cta.question") }}
                 </p>
                 <UButton
                     size="xl"
@@ -137,7 +137,7 @@
                     class="shadow-lg shadow-primary-500/50 px-4 cursor-pointer"
                 >
                     <Icon name="i-heroicons-rocket-launch" class="w-5 h-5" />
-                    Create Your First Goal
+                    {{ $t("howItWorks.cta.button") }}
                 </UButton>
             </div>
         </div>
@@ -145,40 +145,38 @@
 </template>
 
 <script setup lang="ts">
-const steps = [
+const { $t } = useI18n();
+
+const steps = computed(() => [
     {
         number: "01",
-        title: "Set Your Goal",
-        description:
-            "Create a savings goal with your target amount and deadline. Add a name and choose to make it public or private.",
+        title: $t("howItWorks.steps.step1.title"),
+        description: $t("howItWorks.steps.step1.description"),
         icon: "i-heroicons-flag",
         color: "secondary",
     },
     {
         number: "02",
-        title: "Track Your Progress",
-        description:
-            "Log your savings regularly. Our system automatically calculates how much you need to save daily to reach your target.",
+        title: $t("howItWorks.steps.step2.title"),
+        description: $t("howItWorks.steps.step2.description"),
         icon: "i-heroicons-chart-bar-square",
         color: "success",
     },
     {
         number: "03",
-        title: "Share or Keep Private",
-        description:
-            "Choose to share your goals publicly to inspire others, or keep them private for personal tracking for some people only.",
+        title: $t("howItWorks.steps.step3.title"),
+        description: $t("howItWorks.steps.step3.description"),
         icon: "i-heroicons-users",
         color: "warning",
     },
     {
         number: "04",
-        title: "Celebrate Success",
-        description:
-            "When you reach your goal, celebrate your achievement! Get badges and share your success with the large community.",
+        title: $t("howItWorks.steps.step4.title"),
+        description: $t("howItWorks.steps.step4.description"),
         icon: "i-heroicons-trophy",
         color: "error",
     },
-];
+]);
 </script>
 
 <style scoped></style>

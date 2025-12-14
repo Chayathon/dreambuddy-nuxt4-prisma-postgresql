@@ -27,28 +27,26 @@
                         <span
                             class="text-sm font-medium text-primary-700 dark:text-primary-300"
                         >
-                            #1 Savings Goal Tracker
+                            {{ $t("hero.badge") }}
                         </span>
                     </div>
 
                     <!-- Headline -->
                     <div class="space-y-4">
                         <h1
-                            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight"
+                            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-gray-900 dark:text-white"
                         >
-                            Turn Your Dreams
+                            {{ $t("hero.title") }}
                             <span
                                 class="block bg-linear-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent"
                             >
-                                Into Reality
+                                {{ $t("hero.titleHighlight") }}
                             </span>
                         </h1>
                         <p
                             class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0"
                         >
-                            Set savings goals, track progress automatically, and
-                            share your journey with the community. Make your
-                            financial dreams come true with DreamBuddy.
+                            {{ $t("hero.subtitle") }}
                         </p>
                     </div>
 
@@ -65,7 +63,7 @@
                                 name="i-heroicons-rocket-launch"
                                 class="w-5 h-5"
                             />
-                            Start Free
+                            {{ $t("hero.startFree") }}
                         </UButton>
                         <UButton
                             size="xl"
@@ -77,7 +75,7 @@
                                 name="i-heroicons-play-circle"
                                 class="w-5 h-5"
                             />
-                            See Demo
+                            {{ $t("hero.seeDemo") }}
                         </UButton>
                     </div>
 
@@ -86,8 +84,8 @@
                         class="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200 dark:border-gray-800"
                     >
                         <div
-                            v-for="stat in stats"
-                            :key="stat.label"
+                            v-for="(stat, index) in stats"
+                            :key="index"
                             class="text-center lg:text-left"
                         >
                             <div
@@ -124,18 +122,25 @@
                                             <h3
                                                 class="font-semibold text-gray-900 dark:text-white"
                                             >
-                                                Dream House
+                                                {{
+                                                    $t(
+                                                        "hero.goalCard.dreamHouse"
+                                                    )
+                                                }}
                                             </h3>
                                             <p
                                                 class="text-sm text-gray-500 dark:text-gray-400"
                                             >
-                                                by @johndoe
+                                                {{
+                                                    $t("hero.goalCard.by")
+                                                }}
+                                                @johndoe
                                             </p>
                                         </div>
                                     </div>
-                                    <UBadge color="primary" variant="subtle"
-                                        >Public</UBadge
-                                    >
+                                    <UBadge color="primary" variant="subtle">{{
+                                        $t("hero.goalCard.public")
+                                    }}</UBadge>
                                 </div>
                             </template>
 
@@ -145,14 +150,20 @@
                                     <div class="flex justify-between mb-2">
                                         <span
                                             class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                                            >Progress</span
+                                            >{{
+                                                $t("hero.goalCard.progress")
+                                            }}</span
                                         >
                                         <span
                                             class="text-sm font-bold text-primary-600 dark:text-primary-400"
                                             >65%</span
                                         >
                                     </div>
-                                    <UProgress :value="65" size="md" />
+                                    <UProgress
+                                        v-model="progress"
+                                        size="md"
+                                        aria-label="Goal progress: 65%"
+                                    />
                                 </div>
 
                                 <!-- Amount -->
@@ -161,7 +172,7 @@
                                         <p
                                             class="text-xs text-gray-500 dark:text-gray-400"
                                         >
-                                            Saved
+                                            {{ $t("hero.goalCard.saved") }}
                                         </p>
                                         <p
                                             class="text-lg font-bold text-gray-900 dark:text-white"
@@ -173,7 +184,7 @@
                                         <p
                                             class="text-xs text-gray-500 dark:text-gray-400"
                                         >
-                                            Goal
+                                            {{ $t("hero.goalCard.goal") }}
                                         </p>
                                         <p
                                             class="text-lg font-bold text-gray-900 dark:text-white"
@@ -192,7 +203,9 @@
                                     >
                                         <span
                                             class="text-sm text-gray-600 dark:text-gray-300"
-                                            >Daily target</span
+                                            >{{
+                                                $t("hero.goalCard.dailyTarget")
+                                            }}</span
                                         >
                                         <span
                                             class="text-sm font-semibold text-primary-700 dark:text-primary-300"
@@ -206,19 +219,21 @@
                                     <UButton
                                         block
                                         variant="soft"
-                                        class="cursor-pointer"
+                                        class="cursor-pointer px-4 py-2"
+                                        aria-label="Add savings to goal"
                                     >
                                         <Icon
                                             name="i-heroicons-plus"
                                             class="w-4 h-4 mr-1"
                                         />
-                                        Add Savings
+                                        {{ $t("hero.goalCard.addSavings") }}
                                     </UButton>
                                     <UButton
                                         color="neutral"
                                         variant="outline"
                                         square
-                                        class="cursor-pointer"
+                                        class="cursor-pointer px-4 py-2"
+                                        aria-label="Like this goal"
                                     >
                                         <Icon
                                             name="i-heroicons-heart"
@@ -245,11 +260,15 @@
 </template>
 
 <script setup lang="ts">
-const stats = [
-    { value: "10,000+", label: "Active Users" },
-    { value: "50,000+", label: "Goals Created" },
-    { value: "₿1M+", label: "Savings Achieved" },
-];
+const { $t } = useI18n();
+
+const stats = computed(() => [
+    { value: "10,000+", label: $t("hero.stats.activeUsers") },
+    { value: "50,000+", label: $t("hero.stats.goalsCreated") },
+    { value: "₿1M+", label: $t("hero.stats.savingsAchieved") },
+]);
+
+const progress = ref(65);
 </script>
 
 <style scoped></style>

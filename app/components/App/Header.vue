@@ -9,6 +9,7 @@
                     href="#"
                     @click="scrollToTop"
                     class="flex items-center space-x-2 cursor-pointer"
+                    aria-label="DreamBuddy Home"
                 >
                     <Icon
                         name="i-heroicons-sparkles"
@@ -24,8 +25,8 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a
-                        v-for="link in navLinks"
-                        :key="link.name"
+                        v-for="(link, index) in navLinks"
+                        :key="index"
                         :href="link.href"
                         @click="scrollToSection($event, link.href)"
                         class="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors cursor-pointer"
@@ -34,42 +35,137 @@
                     </a>
                 </div>
 
-                <!-- CTA Buttons -->
-                <div class="flex items-center space-x-4">
+                <!-- Desktop CTA Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <AppLanguageSwitcher />
+
                     <!-- Theme Toggle -->
                     <AppThemeToggle />
 
                     <UButton
                         variant="ghost"
                         size="md"
-                        class="hidden sm:inline-flex cursor-pointer"
+                        class="cursor-pointer"
+                        @click="$router.push($localePath('/auth/login'))"
                     >
-                        Sign In
+                        {{ $t("nav.signIn") }}
                     </UButton>
-                    <UButton size="md" color="primary" class="cursor-pointer">
-                        Start Free
+                    <UButton
+                        size="md"
+                        color="primary"
+                        class="cursor-pointer"
+                        @click="$router.push($localePath('/auth/register'))"
+                    >
+                        {{ $t("nav.startFree") }}
                     </UButton>
                 </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden items-center space-x-2">
+                    <!-- Language Switcher (Mobile) -->
+                    <AppLanguageSwitcher />
+
+                    <!-- Theme Toggle (Mobile) -->
+                    <AppThemeToggle />
+
+                    <!-- Hamburger Button -->
+                    <button
+                        @click="toggleMobileMenu"
+                        class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                        aria-label="Toggle mobile menu"
+                        :aria-expanded="isMobileMenuOpen"
+                    >
+                        <Icon
+                            :name="
+                                isMobileMenuOpen
+                                    ? 'i-heroicons-x-mark'
+                                    : 'i-heroicons-bars-3'
+                            "
+                            class="w-6 h-6 text-gray-600 dark:text-gray-300"
+                        />
+                    </button>
+                </div>
             </nav>
+
+            <!-- Mobile Menu -->
+            <Transition
+                enter-active-class="transition duration-200 ease-out"
+                enter-from-class="opacity-0 -translate-y-2"
+                enter-to-class="opacity-100 translate-y-0"
+                leave-active-class="transition duration-150 ease-in"
+                leave-from-class="opacity-100 translate-y-0"
+                leave-to-class="opacity-0 -translate-y-2"
+            >
+                <div
+                    v-if="isMobileMenuOpen"
+                    class="md:hidden py-4 border-t border-gray-200 dark:border-gray-800"
+                >
+                    <!-- Mobile Navigation Links -->
+                    <div class="flex flex-col space-y-3 mb-4">
+                        <a
+                            v-for="(link, index) in navLinks"
+                            :key="index"
+                            :href="link.href"
+                            @click="scrollToSection($event, link.href)"
+                            class="px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-primary-500 hover:bg-gray-50 dark:hover:bg-gray-800/50 rounded-lg transition-colors cursor-pointer"
+                        >
+                            {{ link.name }}
+                        </a>
+                    </div>
+
+                    <!-- Mobile CTA Buttons -->
+                    <div class="flex flex-col space-y-2 px-4">
+                        <UButton
+                            variant="ghost"
+                            size="md"
+                            block
+                            class="cursor-pointer"
+                            @click="
+                                $router.push($localePath('/auth/login'));
+                                isMobileMenuOpen = false;
+                            "
+                        >
+                            {{ $t("nav.signIn") }}
+                        </UButton>
+                        <UButton
+                            size="md"
+                            color="primary"
+                            block
+                            class="cursor-pointer"
+                            @click="
+                                $router.push($localePath('/auth/register'));
+                                isMobileMenuOpen = false;
+                            "
+                        >
+                            {{ $t("nav.startFree") }}
+                        </UButton>
+                    </div>
+                </div>
+            </Transition>
         </div>
     </header>
 </template>
 
 <script setup lang="ts">
-const navLinks = [
-    { name: "Features", href: "#features" },
-    { name: "How it works", href: "#how-it-works" },
-    { name: "Community", href: "#community" },
-    { name: "Testimonials", href: "#testimonials" },
-];
+const { $t, $localePath } = useI18n();
+
+const isMobileMenuOpen = ref(false);
+
+const navLinks = computed(() => [
+    { name: $t("nav.features"), href: "#features" },
+    { name: $t("nav.howItWorks"), href: "#how-it-works" },
+    { name: $t("nav.community"), href: "#community" },
+    { name: $t("nav.testimonials"), href: "#testimonials" },
+]);
 
 const scrollToSection = (e: Event, href: string) => {
     e.preventDefault();
-    const targetId = href.substring(1); // Remove '#'
+    const targetId = href.substring(1);
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
-        const headerOffset = 65; // Height of sticky header + some padding
+        const headerOffset = 65;
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition =
             elementPosition + window.pageYOffset - headerOffset;
@@ -79,6 +175,8 @@ const scrollToSection = (e: Event, href: string) => {
             behavior: "smooth",
         });
     }
+
+    isMobileMenuOpen.value = false;
 };
 
 const scrollToTop = (e: Event) => {
@@ -87,6 +185,10 @@ const scrollToTop = (e: Event) => {
         top: 0,
         behavior: "smooth",
     });
+};
+
+const toggleMobileMenu = () => {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
 </script>
 
