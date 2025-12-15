@@ -14,13 +14,18 @@
     "@nuxtjs/google-fonts": "^3.2.0",
     "@prisma/client": "6.19.0",
     "@tailwindcss/vite": "^4.1.18",
+    "bcryptjs": "^3.0.3",
+    "jsonwebtoken": "^9.0.3",
     "nuxt": "^4.2.2",
     "nuxt-i18n-micro": "^2.15.2",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.3",
+    "zod": "^4.2.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "prisma": "6.19.0"
   }
 }
