@@ -21,6 +21,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+    middleware: "auth",
+});
+
 useHead({
     title: "DreamBuddy - Turn Your Dreams Into Reality",
     meta: [

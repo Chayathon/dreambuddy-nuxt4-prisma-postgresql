@@ -43,22 +43,40 @@
                     <!-- Theme Toggle -->
                     <AppThemeToggle />
 
-                    <UButton
-                        variant="ghost"
-                        size="md"
-                        class="cursor-pointer"
-                        @click="$router.push($localePath('/auth/login'))"
-                    >
-                        {{ $t("nav.signIn") }}
-                    </UButton>
-                    <UButton
-                        size="md"
-                        color="primary"
-                        class="cursor-pointer"
-                        @click="$router.push($localePath('/auth/register'))"
-                    >
-                        {{ $t("nav.startFree") }}
-                    </UButton>
+                    <template v-if="!user">
+                        <UButton
+                            variant="ghost"
+                            size="md"
+                            class="cursor-pointer"
+                            @click="$router.push($localePath('/auth/login'))"
+                        >
+                            {{ $t("nav.signIn") }}
+                        </UButton>
+                        <UButton
+                            size="md"
+                            color="primary"
+                            class="cursor-pointer"
+                            @click="$router.push($localePath('/auth/register'))"
+                        >
+                            {{ $t("nav.startFree") }}
+                        </UButton>
+                    </template>
+                    <template v-else>
+                        <div class="flex items-center gap-2">
+                            <span
+                                class="text-sm font-medium text-gray-700 dark:text-gray-200"
+                            >
+                                {{ user.name || user.username }}
+                            </span>
+                            <UButton
+                                color="neutral"
+                                variant="ghost"
+                                icon="i-heroicons-arrow-right-start-on-rectangle"
+                                @click="handleLogout"
+                                class="cursor-pointer"
+                            />
+                        </div>
+                    </template>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -116,30 +134,49 @@
 
                     <!-- Mobile CTA Buttons -->
                     <div class="flex flex-col space-y-2 px-4">
-                        <UButton
-                            variant="ghost"
-                            size="md"
-                            block
-                            class="cursor-pointer"
-                            @click="
-                                $router.push($localePath('/auth/login'));
-                                isMobileMenuOpen = false;
-                            "
-                        >
-                            {{ $t("nav.signIn") }}
-                        </UButton>
-                        <UButton
-                            size="md"
-                            color="primary"
-                            block
-                            class="cursor-pointer"
-                            @click="
-                                $router.push($localePath('/auth/register'));
-                                isMobileMenuOpen = false;
-                            "
-                        >
-                            {{ $t("nav.startFree") }}
-                        </UButton>
+                        <template v-if="!user">
+                            <UButton
+                                variant="ghost"
+                                size="md"
+                                block
+                                class="cursor-pointer"
+                                @click="
+                                    $router.push($localePath('/auth/login'));
+                                    isMobileMenuOpen = false;
+                                "
+                            >
+                                {{ $t("nav.signIn") }}
+                            </UButton>
+                            <UButton
+                                size="md"
+                                color="primary"
+                                block
+                                class="cursor-pointer"
+                                @click="
+                                    $router.push($localePath('/auth/register'));
+                                    isMobileMenuOpen = false;
+                                "
+                            >
+                                {{ $t("nav.startFree") }}
+                            </UButton>
+                        </template>
+                        <template v-else>
+                            <div
+                                class="px-2 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 border-b border-gray-100 dark:border-gray-800 mb-2"
+                            >
+                                {{ user.name || user.username }}
+                            </div>
+                            <UButton
+                                color="neutral"
+                                variant="ghost"
+                                block
+                                icon="i-heroicons-arrow-right-start-on-rectangle"
+                                @click="handleLogout"
+                                class="cursor-pointer justify-start"
+                            >
+                                Logout
+                            </UButton>
+                        </template>
                     </div>
                 </div>
             </Transition>
@@ -150,8 +187,31 @@
 <script setup lang="ts">
 const { $t, $localePath } = useI18n();
 
+// User state
+const user = useState<{
+    id: number;
+    username: string;
+    email: string;
+    name: string | null;
+} | null>("user", () => null);
+
+// Fetch user on mount
+const { data: authData } = await useFetch("/api/v1/auth/me");
+if (authData.value?.user) {
+    user.value = authData.value.user;
+}
+
+const handleLogout = async () => {
+    await $fetch("/api/v1/auth/logout", { method: "POST" });
+    user.value = null;
+    await navigateTo($localePath("/"));
+    isMobileMenuOpen.value = false;
+};
+
+// ตัวแปร state สำหรับ mobile menu
 const isMobileMenuOpen = ref(false);
 
+// ตัวแปรลิงก์การนำทาง
 const navLinks = computed(() => [
     { name: $t("nav.features"), href: "#features" },
     { name: $t("nav.howItWorks"), href: "#how-it-works" },
@@ -159,13 +219,14 @@ const navLinks = computed(() => [
     { name: $t("nav.testimonials"), href: "#testimonials" },
 ]);
 
+// สำหรับการเลื่อนหน้าแบบนุ่มนวลพร้อมการชดเชยสำหรับส่วนหัวที่ติดอยู่
 const scrollToSection = (e: Event, href: string) => {
     e.preventDefault();
-    const targetId = href.substring(1);
+    const targetId = href.substring(1); // Remove '#'
     const targetElement = document.getElementById(targetId);
 
     if (targetElement) {
-        const headerOffset = 65;
+        const headerOffset = 65; // Height of sticky header + some padding
         const elementPosition = targetElement.getBoundingClientRect().top;
         const offsetPosition =
             elementPosition + window.pageYOffset - headerOffset;
@@ -176,9 +237,11 @@ const scrollToSection = (e: Event, href: string) => {
         });
     }
 
+    // ปิด mobile menu หลังจากคลิก
     isMobileMenuOpen.value = false;
 };
 
+// สำหรับการเลื่อนขึ้นบนสุดเมื่อคลิกโลโก้
 const scrollToTop = (e: Event) => {
     e.preventDefault();
     window.scrollTo({
@@ -187,6 +250,7 @@ const scrollToTop = (e: Event) => {
     });
 };
 
+// ฟังก์ชัน toggle mobile menu
 const toggleMobileMenu = () => {
     isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
