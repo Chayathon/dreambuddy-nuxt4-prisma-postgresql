@@ -234,6 +234,7 @@ const toast = useToast();
 
 definePageMeta({
     layout: "auth",
+    middleware: "guest",
 });
 
 useHead({
