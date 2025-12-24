@@ -243,7 +243,28 @@
   },
   "explore": {
     "exploreTitle": "สำรวจความฝัน",
-    "exploreSubtitle": "ดูว่าใครกำลังออมเงินเพื่ออะไรและรับแรงบันดาลใจ"
+    "exploreSubtitle": "ดูว่าใครกำลังออมเงินเพื่ออะไรและรับแรงบันดาลใจ",
+    "comments": "ความคิดเห็น",
+    "noComments": "ยังไม่มีความคิดเห็น เป็นคนแรกที่แสดงความคิดเห็น!",
+    "commentPlaceholder": "เขียนความคิดเห็น...",
+    "send": "ส่ง",
+    "loginToComment": "กรุณาเข้าสู่ระบบเพื่อแสดงความคิดเห็น",
+    "notify": {
+      "loadCommentsErrorTitle": "ข้อผิดพลาด",
+      "loadCommentsErrorMessage": "ไม่สามารถโหลดความคิดเห็นได้",
+      "addCommentSuccessTitle": "สำเร็จ",
+      "addCommentSuccessMessage": "เพิ่มความคิดเห็นเรียบร้อยแล้ว",
+      "addCommentErrorTitle": "ข้อผิดพลาด",
+      "addCommentErrorMessage": "ไม่สามารถเพิ่มความคิดเห็นได้",
+      "updateCommentSuccessTitle": "สำเร็จ",
+      "updateCommentSuccessMessage": "อัปเดตความคิดเห็นเรียบร้อยแล้ว",
+      "updateCommentErrorTitle": "ข้อผิดพลาด",
+      "updateCommentErrorMessage": "ไม่สามารถอัปเดตความคิดเห็นได้",
+      "deleteCommentSuccessTitle": "สำเร็จ",
+      "deleteCommentSuccessMessage": "ลบความคิดเห็นเรียบร้อยแล้ว",
+      "deleteCommentErrorTitle": "ข้อผิดพลาด",
+      "deleteCommentErrorMessage": "ไม่สามารถลบความคิดเห็นได้"
+    }
   },
   "common": {
     "cancel": "ยกเลิก",

@@ -243,7 +243,28 @@
   },
   "explore": {
     "exploreTitle": "Explore Dreams",
-    "exploreSubtitle": "See what others are saving for and get inspired."
+    "exploreSubtitle": "See what others are saving for and get inspired.",
+    "comments": "Comments",
+    "noComments": "No comments yet. Be the first to comment!",
+    "commentPlaceholder": "Write a comment...",
+    "send": "Send",
+    "loginToComment": "Please login to comment",
+    "notify": {
+      "loadCommentsErrorTitle": "Error",
+      "loadCommentsErrorMessage": "Failed to load comments",
+      "addCommentSuccessTitle": "Success",
+      "addCommentSuccessMessage": "Comment added successfully",
+      "addCommentErrorTitle": "Error",
+      "addCommentErrorMessage": "Failed to add comment",
+      "updateCommentSuccessTitle": "Success",
+      "updateCommentSuccessMessage": "Comment updated successfully",
+      "updateCommentErrorTitle": "Error",
+      "updateCommentErrorMessage": "Failed to update comment",
+      "deleteCommentSuccessTitle": "Success",
+      "deleteCommentSuccessMessage": "Comment deleted successfully",
+      "deleteCommentErrorTitle": "Error",
+      "deleteCommentErrorMessage": "Failed to delete comment"
+    }
   },
   "common": {
     "cancel": "Cancel",
