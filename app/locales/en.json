@@ -4,6 +4,8 @@
     "howItWorks": "How it works",
     "community": "Community",
     "testimonials": "Testimonials",
+    "myGoals": "My Goals",
+    "explore": "Explore",
     "signIn": "Sign In",
     "startFree": "Start Free"
   },
@@ -162,6 +164,91 @@
       "terms": "Terms of Service",
       "cookies": "Cookies"
     }
+  },
+  "goals": {
+    "goal": "Goal",
+    "myGoals": "My Goals",
+    "newGoal": "New Goal",
+    "noGoalsMessage": "You don't have any goals yet.",
+    "history": "History",
+    "details": "Details",
+    "created": "Created",
+    "updated": "Updated",
+    "owner": "Owner",
+    "progress": "Progress",
+    "saved": "Saved",
+    "target": "Target",
+    "dailyTarget": "Daily Target",
+    "backToGoals": "Back to Goals",
+    "createNewGoal": "Create New Goal",
+    "createGoal": "Create Goal",
+    "editGoal": "Edit Goal",
+    "updateGoal": "Update Goal",
+    "deleteGoal": "Delete Goal",
+    "deleteGoalConfirm": "Are you sure you want to delete this goal? This action cannot be undone.",
+    "goalTitle": "Goal Title",
+    "goalTitlePlaceholder": "e.g. Dream Vacation",
+    "targetAmount": "Target Amount",
+    "targetDate": "Target Date",
+    "category": "Category",
+    "visibility": "Visibility",
+    "public": "Public",
+    "private": "Private",
+    "linkOnly": "Link Only",
+    "imageUrl": "Image URL (Optional)",
+    "note": "Note (Optional)",
+    "notePlaceholder": "Why do you want to save for this?",
+    "notify": {
+      "createSuccessTitle": "Success",
+      "createSuccessMessage": "Goal created successfully",
+      "createErrorTitle": "Error",
+      "createErrorMessage": "Failed to create goal",
+      "updateSuccessTitle": "Success",
+      "updateSuccessMessage": "Goal updated successfully",
+      "updateErrorTitle": "Error",
+      "updateErrorMessage": "Failed to update goal",
+      "deleteSuccessTitle": "Success",
+      "deleteSuccessMessage": "Goal deleted successfully",
+      "deleteErrorTitle": "Error",
+      "deleteErrorMessage": "Failed to delete goal"
+    },
+    "validate": {
+      "goalTitleRequired": "Goal title is required",
+      "amountMustBePositive": "Amount must be positive",
+      "dateMustBeInTheFuture": "Date must be in the future",
+      "invalidUrl": "Invalid URL"
+    },
+    "transaction": {
+      "addTransaction": "Add Transaction",
+      "noTransactions": "No transactions yet.",
+      "type": "Type",
+      "deposit": "Deposit",
+      "withdraw": "Withdraw",
+      "amount": "Amount",
+      "amountRequired": "Amount is required",
+      "amountPositive": "Amount must be positive",
+      "amountInvalid": "Amount must be a number",
+      "note": "Note",
+      "notePlaceholder": "Optional note",
+      "typeRequired": "Type is required",
+      "successTitle": "Success",
+      "successMessage": "Transaction recorded",
+      "errorTitle": "Error",
+      "errorMessage": "Failed to record transaction"
+    },
+    "share": {
+      "linkCopied": "Link copied to clipboard!",
+      "linkCopiedDescription": "You can now share it with others."
+    }
+  },
+  "explore": {
+    "exploreTitle": "Explore Dreams",
+    "exploreSubtitle": "See what others are saving for and get inspired."
+  },
+  "common": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "back": "Back"
   },
   "auth": {
     "backToHome": "Back to Homepage",

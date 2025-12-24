@@ -4,6 +4,8 @@
     "howItWorks": "วิธีใช้งาน",
     "community": "ชุมชน",
     "testimonials": "รีวิว",
+    "myGoals": "เป้าหมายของฉัน",
+    "explore": "สำรวจ",
     "signIn": "เข้าสู่ระบบ",
     "startFree": "เริ่มใช้ฟรี"
   },
@@ -162,6 +164,91 @@
       "terms": "เงื่อนไขการให้บริการ",
       "cookies": "คุกกี้"
     }
+  },
+  "goals": {
+    "goal": "เป้าหมาย",
+    "myGoals": "เป้าหมายของฉัน",
+    "newGoal": "เป้าหมายใหม่",
+    "noGoalsMessage": "คุณยังไม่มีเป้าหมายใดๆ",
+    "history": "ประวัติ",
+    "details": "รายละเอียด",
+    "created": "สร้างเมื่อ",
+    "updated": "อัปเดตเมื่อ",
+    "owner": "เจ้าของ",
+    "progress": "ความคืบหน้า",
+    "saved": "ออมแล้ว",
+    "target": "เป้าหมาย",
+    "dailyTarget": "เป้าหมายรายวัน",
+    "backToGoals": "กลับไปยังเป้าหมาย",
+    "createNewGoal": "สร้างเป้าหมายใหม่",
+    "createGoal": "สร้างเป้าหมาย",
+    "editGoal": "แก้ไขเป้าหมาย",
+    "updateGoal": "อัปเดตเป้าหมาย",
+    "deleteGoal": "ลบเป้าหมาย",
+    "deleteGoalConfirm": "คุณแน่ใจหรือไม่ว่าต้องการลบเป้าหมายนี้? การกระทำนี้ไม่สามารถย้อนกลับได้",
+    "goalTitle": "ชื่อเป้าหมาย",
+    "goalTitlePlaceholder": "เช่น ที่เที่ยวในฝัน",
+    "targetAmount": "จำนวน",
+    "targetDate": "วันที่",
+    "category": "หมวดหมู่",
+    "visibility": "การมองเห็น",
+    "public": "สาธารณะ",
+    "private": "ส่วนตัว",
+    "linkOnly": "ลิงก์เท่านั้น",
+    "imageUrl": "URL รูปภาพ (ไม่บังคับ)",
+    "note": "บันทึก (ไม่บังคับ)",
+    "notePlaceholder": "ทำไมคุณถึงต้องการออมเงินสำหรับสิ่งนี้?",
+    "notify": {
+      "createSuccessTitle": "สำเร็จ",
+      "createSuccessMessage": "สร้างเป้าหมายสำเร็จ",
+      "createErrorTitle": "ข้อผิดพลาด",
+      "createErrorMessage": "ไม่สามารถสร้างเป้าหมายได้",
+      "updateSuccessTitle": "สำเร็จ",
+      "updateSuccessMessage": "อัปเดตเป้าหมายสำเร็จ",
+      "updateErrorTitle": "ข้อผิดพลาด",
+      "updateErrorMessage": "ไม่สามารถอัปเดตเป้าหมายได้",
+      "deleteSuccessTitle": "สำเร็จ",
+      "deleteSuccessMessage": "ลบเป้าหมายสำเร็จ",
+      "deleteErrorTitle": "ข้อผิดพลาด",
+      "deleteErrorMessage": "ไม่สามารถลบเป้าหมายได้"
+    },
+    "validate": {
+      "goalTitleRequired": "จำเป็นต้องระบุชื่อเป้าหมาย",
+      "amountMustBePositive": "จำนวนเงินต้องเป็นบวก",
+      "dateMustBeInTheFuture": "วันที่ต้องเป็นอนาคต",
+      "invalidUrl": "URL ไม่ถูกต้อง"
+    },
+    "transaction": {
+      "addTransaction": "เพิ่มรายการ",
+      "noTransactions": "ยังไม่มีรายการ",
+      "type": "ประเภท",
+      "deposit": "ฝาก",
+      "withdraw": "ถอน",
+      "amount": "จำนวนเงิน",
+      "amountRequired": "จำเป็นต้องระบุจำนวนเงิน",
+      "amountPositive": "จำนวนเงินต้องมากกว่า 0",
+      "amountInvalid": "จำนวนเงินต้องเป็นตัวเลข",
+      "note": "บันทึก",
+      "notePlaceholder": "บันทึกเพิ่มเติม (ถ้ามี)",
+      "typeRequired": "จำเป็นต้องระบุประเภท",
+      "successTitle": "สำเร็จ",
+      "successMessage": "บันทึกรายการเรียบร้อยแล้ว",
+      "errorTitle": "ข้อผิดพลาด",
+      "errorMessage": "ไม่สามารถบันทึกรายการได้"
+    },
+    "share": {
+      "linkCopied": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
+      "linkCopiedDescription": "คุณสามารถแชร์กับผู้อื่นได้แล้ว"
+    }
+  },
+  "explore": {
+    "exploreTitle": "สำรวจความฝัน",
+    "exploreSubtitle": "ดูว่าใครกำลังออมเงินเพื่ออะไรและรับแรงบันดาลใจ"
+  },
+  "common": {
+    "cancel": "ยกเลิก",
+    "save": "บันทึก",
+    "back": "ย้อนกลับ"
   },
   "auth": {
     "backToHome": "กลับไปหน้าหลัก",
