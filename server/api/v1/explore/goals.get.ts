@@ -1,6 +1,9 @@
 import { prisma } from "../../../utils/prisma";
+import { getCurrentUser } from "../../../utils/auth";
 
 export default defineEventHandler(async (event) => {
+    const currentUser = await getCurrentUser(event);
+
     const goals = await prisma.goal.findMany({
         where: {
             visibility: "PUBLIC",
@@ -14,6 +17,17 @@ export default defineEventHandler(async (event) => {
                     avatarUrl: true,
                 },
             },
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
+            likes: currentUser
+                ? {
+                      where: { userId: currentUser.id },
+                      select: { userId: true },
+                  }
+                : false,
         },
         orderBy: {
             createdAt: "desc",
@@ -21,5 +35,14 @@ export default defineEventHandler(async (event) => {
         take: 50,
     });
 
-    return goals;
+    // Map to add isLiked and commentsCount fields
+    const goalsWithLikeStatus = goals.map((goal) => ({
+        ...goal,
+        isLiked: currentUser ? goal.likes && goal.likes.length > 0 : false,
+        commentsCount: goal._count.comments,
+        likes: undefined,
+        _count: undefined,
+    }));
+
+    return goalsWithLikeStatus;
 });
