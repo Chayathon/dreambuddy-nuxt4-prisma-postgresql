@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         await fetchUser();
     }
 
-    if (!user.value) {
-        return navigateTo("/auth/login");
+    if (user.value) {
+        return navigateTo("/goals");
     }
 });
