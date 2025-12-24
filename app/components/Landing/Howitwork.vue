@@ -132,6 +132,7 @@
                     {{ $t("howItWorks.cta.question") }}
                 </p>
                 <UButton
+                    @click="navigateTo('/auth/register')"
                     size="xl"
                     color="primary"
                     class="shadow-lg shadow-primary-500/50 px-4 cursor-pointer"

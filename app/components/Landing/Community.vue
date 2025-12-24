@@ -150,6 +150,7 @@
             <!-- CTA -->
             <div class="text-center">
                 <UButton
+                    @click="navigateTo('/explore')"
                     size="lg"
                     variant="outline"
                     class="cursor-pointer px-4"

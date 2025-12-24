@@ -55,6 +55,7 @@
                         class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
                     >
                         <UButton
+                            @click="navigateTo('/auth/register')"
                             size="xl"
                             color="primary"
                             class="px-4 cursor-pointer"
@@ -131,9 +132,7 @@
                                             <p
                                                 class="text-sm text-gray-500 dark:text-gray-400"
                                             >
-                                                {{
-                                                    $t("hero.goalCard.by")
-                                                }}
+                                                {{ $t("hero.goalCard.by") }}
                                                 @johndoe
                                             </p>
                                         </div>

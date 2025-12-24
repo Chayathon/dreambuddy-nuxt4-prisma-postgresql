@@ -62,6 +62,7 @@
                         class="flex flex-col sm:flex-row gap-4 justify-center items-center"
                     >
                         <UButton
+                            @click="navigateTo('/auth/register')"
                             size="xl"
                             color="primary"
                             class="shadow-lg shadow-primary-500/50 px-4 cursor-pointer"

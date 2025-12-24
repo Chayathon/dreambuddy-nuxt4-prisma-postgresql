@@ -97,6 +97,7 @@
                             </p>
                         </div>
                         <UButton
+                            @click="navigateTo('/auth/register')"
                             size="lg"
                             color="primary"
                             class="whitespace-nowrap cursor-pointer px-6 py-3"
