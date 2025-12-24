@@ -41,7 +41,7 @@ export function verifyToken(token: string): JwtPayload | null {
 
 export function setAuthCookie(event: H3Event, token: string) {
     setCookie(event, COOKIE_NAME, token, {
-        httpOnly: false,
+        httpOnly: true,
         path: "/",
         sameSite: "lax",
         secure: process.env.NODE_ENV === "production",
@@ -54,6 +54,14 @@ export function clearAuthCookie(event: H3Event) {
 }
 
 export async function getCurrentUser(event: H3Event) {
+    // ดึงจาก Context (ที่ Middleware แปะไว้ให้)
+    if (event.context.auth) {
+        return await prisma.user.findUnique({
+            where: { id: event.context.auth.userId },
+        });
+    }
+
+    // ถ้าไม่มีใน Context ให้แกะจาก Cookie (Fallback)
     const token = getCookie(event, COOKIE_NAME);
     if (!token) return null;
 
@@ -64,5 +72,13 @@ export async function getCurrentUser(event: H3Event) {
         where: { id: payload.userId },
     });
 
+    return user;
+}
+
+export async function requireUser(event: H3Event) {
+    const user = await getCurrentUser(event);
+    if (!user) {
+        throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
+    }
     return user;
 }
