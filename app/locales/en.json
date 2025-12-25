@@ -198,6 +198,13 @@
     "imageUrl": "Image URL (Optional)",
     "note": "Note (Optional)",
     "notePlaceholder": "Why do you want to save for this?",
+    "likesComments": "Likes & Comments",
+    "likesCommentsInfo": "Click the icons above to view likes and comments.",
+    "comments": "Comments",
+    "noComments": "No comments yet. Be the first to comment!",
+    "commentPlaceholder": "Write a comment...",
+    "send": "Send",
+    "noLikers": "No likes yet.",
     "notify": {
       "createSuccessTitle": "Success",
       "createSuccessMessage": "Goal created successfully",
@@ -244,10 +251,6 @@
   "explore": {
     "exploreTitle": "Explore Dreams",
     "exploreSubtitle": "See what others are saving for and get inspired.",
-    "comments": "Comments",
-    "noComments": "No comments yet. Be the first to comment!",
-    "commentPlaceholder": "Write a comment...",
-    "send": "Send",
     "loginToComment": "Please login to comment",
     "notify": {
       "loadCommentsErrorTitle": "Error",

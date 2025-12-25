@@ -198,6 +198,13 @@
     "imageUrl": "URL รูปภาพ (ไม่บังคับ)",
     "note": "บันทึก (ไม่บังคับ)",
     "notePlaceholder": "ทำไมคุณถึงต้องการออมเงินสำหรับสิ่งนี้?",
+    "likesComments": "ถูกใจ & ความคิดเห็น",
+    "likesCommentsInfo": "คลิกที่ไอคอนด้านบนเพื่อดูการถูกใจและความคิดเห็น",
+    "comments": "ความคิดเห็น",
+    "noComments": "ยังไม่มีความคิดเห็น เป็นคนแรกที่แสดงความคิดเห็น!",
+    "commentPlaceholder": "เขียนความคิดเห็น...",
+    "send": "ส่ง",
+    "noLikers": "ยังไม่มีการถูกใจ",
     "notify": {
       "createSuccessTitle": "สำเร็จ",
       "createSuccessMessage": "สร้างเป้าหมายสำเร็จ",
@@ -244,10 +251,6 @@
   "explore": {
     "exploreTitle": "สำรวจความฝัน",
     "exploreSubtitle": "ดูว่าใครกำลังออมเงินเพื่ออะไรและรับแรงบันดาลใจ",
-    "comments": "ความคิดเห็น",
-    "noComments": "ยังไม่มีความคิดเห็น เป็นคนแรกที่แสดงความคิดเห็น!",
-    "commentPlaceholder": "เขียนความคิดเห็น...",
-    "send": "ส่ง",
     "loginToComment": "กรุณาเข้าสู่ระบบเพื่อแสดงความคิดเห็น",
     "notify": {
       "loadCommentsErrorTitle": "ข้อผิดพลาด",
