@@ -67,7 +67,9 @@
                                     >
                                     <span class="text-gray-500"
                                         >{{ $t("goals.targetDate") }}:
-                                        {{ formatDate(goal.targetDate) }}</span
+                                        {{
+                                            formatDateFull(goal.targetDate)
+                                        }}</span
                                     >
                                 </div>
                                 <UProgress
@@ -196,7 +198,7 @@
                                         }}
                                     </p>
                                     <p class="text-xs text-gray-500">
-                                        {{ formatDate(tx.createdAt) }}
+                                        {{ formatDateTimeFull(tx.createdAt) }}
                                     </p>
                                 </div>
                             </div>
@@ -259,13 +261,17 @@
                             <span class="text-gray-500">{{
                                 $t("goals.created")
                             }}</span>
-                            <span>{{ formatDate(goal.createdAt) }}</span>
+                            <span>{{
+                                formatDateTimeFull(goal.createdAt)
+                            }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-500">{{
                                 $t("goals.updated")
                             }}</span>
-                            <span>{{ formatDate(goal.updatedAt) }}</span>
+                            <span>{{
+                                formatDateTimeFull(goal.updatedAt)
+                            }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-500">{{
@@ -276,6 +282,300 @@
                             }}</span>
                         </div>
                     </div>
+                </UCard>
+                <UCard>
+                    <template #header>
+                        <div class="flex items-center justify-between w-full">
+                            <h3 class="font-semibold">
+                                {{
+                                    $t("goals.likesComments") ||
+                                    "Likes & Comments"
+                                }}
+                            </h3>
+                            <div
+                                class="flex justify-center items-center gap-2 text-sm text-gray-500"
+                            >
+                                <button
+                                    @click="toggleLikersPanel"
+                                    class="flex items-center gap-1 text-gray-400 hover:text-red-500 transition-colors"
+                                >
+                                    <UIcon
+                                        name="i-heroicons-heart"
+                                        class="w-5 h-5"
+                                    />
+                                    <span class="text-sm">{{
+                                        goal.likesCount || 0
+                                    }}</span>
+                                </button>
+
+                                <button
+                                    @click="toggleCommentsPanel"
+                                    class="flex items-center gap-1 text-gray-400 hover:text-primary transition-colors"
+                                >
+                                    <UIcon
+                                        name="i-heroicons-chat-bubble-left"
+                                        class="w-5 h-5"
+                                    />
+                                    <span class="text-sm">{{
+                                        goal.commentsCount || 0
+                                    }}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+
+                    <div v-if="goal.visibility === 'PUBLIC'">
+                        <div v-if="showLikersPanel || showCommentsPanel">
+                            <!-- Likers panel -->
+                            <div v-show="showLikersPanel">
+                                <div
+                                    v-if="loadingLikers"
+                                    class="py-2 flex justify-center"
+                                >
+                                    <UIcon
+                                        name="i-heroicons-arrow-path"
+                                        class="w-5 h-5 animate-spin text-gray-400"
+                                    />
+                                </div>
+                                <div v-else>
+                                    <div
+                                        v-if="likers.length === 0"
+                                        class="text-sm text-center text-gray-500"
+                                    >
+                                        {{
+                                            $t("goals.noLikers") ||
+                                            "No likes yet."
+                                        }}
+                                    </div>
+                                    <div
+                                        v-else
+                                        class="space-y-3 max-h-64 overflow-y-auto"
+                                    >
+                                        <div
+                                            v-for="like in likers"
+                                            :key="like.id"
+                                            class="flex w-full p-2 gap-2 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                                        >
+                                            <UAvatar
+                                                :src="
+                                                    like.avatarUrl ?? undefined
+                                                "
+                                                :alt="like.username"
+                                                size="sm"
+                                            />
+                                            <div class="text-sm">
+                                                <div class="font-medium">
+                                                    {{
+                                                        like.name ||
+                                                        like.username
+                                                    }}
+                                                </div>
+                                                <div
+                                                    class="text-xs text-gray-500"
+                                                >
+                                                    @{{ like.username }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div v-show="showCommentsPanel">
+                                <div
+                                    v-if="loadingComments"
+                                    class="py-4 flex justify-center"
+                                >
+                                    <UIcon
+                                        name="i-heroicons-arrow-path"
+                                        class="w-5 h-5 animate-spin text-gray-400"
+                                    />
+                                </div>
+
+                                <div v-else>
+                                    <div
+                                        v-if="comments.length === 0"
+                                        class="text-sm text-center text-gray-500"
+                                    >
+                                        {{
+                                            $t("goals.noComments") ||
+                                            "No comments yet."
+                                        }}
+                                    </div>
+
+                                    <div
+                                        v-else
+                                        class="space-y-3 max-h-64 overflow-y-auto"
+                                    >
+                                        <div
+                                            v-for="comment in comments"
+                                            :key="comment.id"
+                                            class="flex w-full gap-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                                        >
+                                            <UAvatar
+                                                :src="
+                                                    comment.user?.avatarUrl ??
+                                                    undefined
+                                                "
+                                                :alt="comment.user?.username"
+                                                size="sm"
+                                            />
+                                            <div class="flex-1 min-w-0">
+                                                <div
+                                                    class="flex items-center justify-between gap-2"
+                                                >
+                                                    <div
+                                                        class="flex items-center gap-2"
+                                                    >
+                                                        <span
+                                                            class="font-medium text-sm"
+                                                            >{{
+                                                                comment.user
+                                                                    ?.name ||
+                                                                comment.user
+                                                                    ?.username
+                                                            }}</span
+                                                        >
+                                                        <span
+                                                            class="text-xs text-gray-500"
+                                                            >{{
+                                                                formatDateRelative(
+                                                                    comment.createdAt
+                                                                )
+                                                            }}</span
+                                                        >
+                                                    </div>
+                                                    <!-- Edit/Delete for comment owner -->
+                                                    <div
+                                                        v-if="
+                                                            user &&
+                                                            comment.user?.id ===
+                                                                user.id
+                                                        "
+                                                        class="flex items-center gap-1"
+                                                    >
+                                                        <UButton
+                                                            icon="i-heroicons-pencil"
+                                                            variant="ghost"
+                                                            color="neutral"
+                                                            size="xs"
+                                                            @click="
+                                                                startEditComment(
+                                                                    comment
+                                                                )
+                                                            "
+                                                        />
+                                                        <UButton
+                                                            icon="i-heroicons-trash"
+                                                            variant="ghost"
+                                                            color="error"
+                                                            size="xs"
+                                                            @click="
+                                                                deleteComment(
+                                                                    comment.id
+                                                                )
+                                                            "
+                                                            :loading="
+                                                                deletingCommentId ===
+                                                                comment.id
+                                                            "
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <!-- Edit Mode -->
+                                                <div
+                                                    v-if="
+                                                        editingCommentId ===
+                                                        comment.id
+                                                    "
+                                                    class="mt-2"
+                                                >
+                                                    <UTextarea
+                                                        v-model="
+                                                            editCommentContent
+                                                        "
+                                                        :rows="2"
+                                                        class="w-full"
+                                                    />
+                                                    <div
+                                                        class="flex gap-2 mt-2"
+                                                    >
+                                                        <UButton
+                                                            size="xs"
+                                                            @click="
+                                                                saveEditComment(
+                                                                    comment.id
+                                                                )
+                                                            "
+                                                            :loading="
+                                                                savingComment
+                                                            "
+                                                        >
+                                                            {{
+                                                                $t(
+                                                                    "common.save"
+                                                                )
+                                                            }}
+                                                        </UButton>
+                                                        <UButton
+                                                            size="xs"
+                                                            variant="ghost"
+                                                            @click="
+                                                                cancelEditComment
+                                                            "
+                                                        >
+                                                            {{
+                                                                $t(
+                                                                    "common.cancel"
+                                                                )
+                                                            }}
+                                                        </UButton>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Normal Display -->
+                                                <p
+                                                    v-else
+                                                    class="text-sm mt-1 break-words"
+                                                >
+                                                    {{ comment.content }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else class="text-center text-sm text-gray-500">
+                            {{
+                                $t("goals.likesCommentsInfo") ||
+                                "Click the icons above to view likes and comments."
+                            }}
+                        </div>
+                    </div>
+
+                    <!-- Add Comment -->
+                    <template #footer v-if="showCommentsPanel">
+                        <div class="flex gap-2">
+                            <UTextarea
+                                v-model="newComment"
+                                :placeholder="
+                                    String($t('goals.commentPlaceholder')) ||
+                                    'Write a comment'
+                                "
+                                :rows="2"
+                                class="flex-1"
+                            />
+                            <UButton
+                                @click="submitComment"
+                                :loading="submittingComment"
+                                :disabled="!newComment.trim()"
+                            >
+                                {{ $t("goals.send") || "Send" }}
+                            </UButton>
+                        </div>
+                    </template>
                 </UCard>
             </div>
         </div>
@@ -400,6 +700,7 @@ definePageMeta({
 });
 
 const { $t } = useI18n();
+const { formatDateRelative, formatDateFull, formatDateTimeFull } = useDate();
 const route = useRoute();
 const goalId = route.params.id;
 
@@ -548,10 +849,6 @@ const getDailyTarget = (saved: number, target: number, targetDate: string) => {
     return Math.max(0, (target - saved) / diffDays);
 };
 
-const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString();
-};
-
 const copyLink = () => {
     const shareUrl = `${window.location.origin}/goals/share/${goal.value?.shareSlug}`;
     navigator.clipboard.writeText(shareUrl);
@@ -564,6 +861,231 @@ const copyLink = () => {
                 "You can now share it with others."
         ),
     });
+};
+
+// Likes & Comments for public goals
+const { user } = useAuth();
+
+const showCommentsPanel = ref(false);
+const comments = ref<any[]>([]);
+const loadingComments = ref(false);
+const newComment = ref("");
+const submittingComment = ref(false);
+const editingCommentId = ref<number | null>(null);
+const editCommentContent = ref("");
+const savingComment = ref(false);
+const deletingCommentId = ref<number | null>(null);
+
+// Likers
+const showLikersPanel = ref(false);
+const likers = ref<any[]>([]);
+const loadingLikers = ref(false);
+
+const toggleLikersPanel = async () => {
+    const opening = !showLikersPanel.value;
+    showLikersPanel.value = opening;
+
+    if (opening) {
+        showCommentsPanel.value = false;
+        if (likers.value.length === 0) {
+            await fetchLikers();
+        }
+    }
+};
+
+const fetchLikers = async () => {
+    if (!goal.value) return;
+    loadingLikers.value = true;
+    try {
+        const data = await $fetch<any[]>(`/api/v1/goals/${goalId}/likes`);
+        likers.value = data || [];
+    } catch (err: any) {
+        toast.add({
+            title: String($t("goals.notify.loadLikesErrorTitle") || "Error"),
+            description:
+                err?.data?.message ||
+                String(
+                    $t("goals.notify.loadLikesErrorMessage") ||
+                        "Failed to load likers"
+                ),
+            color: "error",
+        });
+    } finally {
+        loadingLikers.value = false;
+    }
+};
+
+const toggleCommentsPanel = async () => {
+    const opening = !showCommentsPanel.value;
+    showCommentsPanel.value = opening;
+
+    if (opening) {
+        showLikersPanel.value = false;
+        if (comments.value.length === 0) {
+            await fetchComments();
+        }
+    }
+};
+
+const fetchComments = async () => {
+    if (!goal.value) return;
+    loadingComments.value = true;
+    try {
+        const data = await $fetch<any[]>(`/api/v1/goals/${goalId}/comments`);
+        comments.value = data || [];
+    } catch (err: any) {
+        toast.add({
+            title: String($t("goals.notify.loadCommentsErrorTitle") || "Error"),
+            description:
+                err?.data?.message ||
+                String(
+                    $t("goals.notify.loadCommentsErrorMessage") ||
+                        "Failed to load comments"
+                ),
+            color: "error",
+        });
+    } finally {
+        loadingComments.value = false;
+    }
+};
+
+const submitComment = async () => {
+    if (!user.value) {
+        navigateTo("/auth/login");
+        return;
+    }
+    if (!newComment.value.trim() || !goal.value) return;
+
+    submittingComment.value = true;
+    try {
+        const created = await $fetch(`/api/v1/goals/${goalId}/comments`, {
+            method: "POST",
+            body: { content: newComment.value },
+        });
+
+        comments.value.unshift(created);
+        newComment.value = "";
+
+        if (goal.value)
+            goal.value.commentsCount = (goal.value.commentsCount || 0) + 1;
+
+        toast.add({
+            title: String(
+                $t("goals.notify.addCommentSuccessTitle") || "Success"
+            ),
+            description: String(
+                $t("goals.notify.addCommentSuccessMessage") ||
+                    "Comment added successfully"
+            ),
+            color: "success",
+        });
+    } catch (err: any) {
+        toast.add({
+            title: String($t("goals.notify.addCommentErrorTitle") || "Error"),
+            description:
+                err?.data?.message ||
+                String(
+                    $t("goals.notify.addCommentErrorMessage") ||
+                        "Failed to add comment"
+                ),
+            color: "error",
+        });
+    } finally {
+        submittingComment.value = false;
+    }
+};
+
+const startEditComment = (c: any) => {
+    editingCommentId.value = c.id;
+    editCommentContent.value = c.content;
+};
+
+const cancelEditComment = () => {
+    editingCommentId.value = null;
+    editCommentContent.value = "";
+};
+
+const saveEditComment = async (commentId: number) => {
+    if (!editCommentContent.value.trim() || !goal.value) return;
+    savingComment.value = true;
+    try {
+        const updated = await $fetch(
+            `/api/v1/goals/${goalId}/comments/${commentId}`,
+            {
+                method: "PUT",
+                body: { content: editCommentContent.value },
+            }
+        );
+        const idx = comments.value.findIndex((c) => c.id === commentId);
+        if (idx !== -1) comments.value[idx] = updated;
+        cancelEditComment();
+        toast.add({
+            title: String(
+                $t("goals.notify.updateCommentSuccessTitle") || "Success"
+            ),
+            description: String(
+                $t("goals.notify.updateCommentSuccessMessage") ||
+                    "Comment updated"
+            ),
+            color: "success",
+        });
+    } catch (err: any) {
+        toast.add({
+            title: String(
+                $t("goals.notify.updateCommentErrorTitle") || "Error"
+            ),
+            description:
+                err?.data?.message ||
+                String(
+                    $t("goals.notify.updateCommentErrorMessage") ||
+                        "Failed to update comment"
+                ),
+            color: "error",
+        });
+    } finally {
+        savingComment.value = false;
+    }
+};
+
+const deleteComment = async (commentId: number) => {
+    if (!goal.value) return;
+    deletingCommentId.value = commentId;
+    try {
+        await $fetch(`/api/v1/goals/${goalId}/comments/${commentId}`, {
+            method: "DELETE",
+        });
+        comments.value = comments.value.filter((c) => c.id !== commentId);
+        if (goal.value)
+            goal.value.commentsCount = Math.max(
+                0,
+                (goal.value.commentsCount || 1) - 1
+            );
+        toast.add({
+            title: String(
+                $t("goals.notify.deleteCommentSuccessTitle") || "Success"
+            ),
+            description: String(
+                $t("goals.notify.deleteCommentSuccessMessage") ||
+                    "Comment deleted"
+            ),
+            color: "success",
+        });
+    } catch (err: any) {
+        toast.add({
+            title: String(
+                $t("goals.notify.deleteCommentErrorTitle") || "Error"
+            ),
+            description:
+                err?.data?.message ||
+                String(
+                    $t("goals.notify.deleteCommentErrorMessage") ||
+                        "Failed to delete comment"
+                ),
+            color: "error",
+        });
+    } finally {
+        deletingCommentId.value = null;
+    }
 };
 
 function onGoalSaved(updated: any) {
