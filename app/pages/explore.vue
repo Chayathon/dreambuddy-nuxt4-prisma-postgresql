@@ -117,7 +117,7 @@
                     <template #header>
                         <div class="flex items-center justify-between">
                             <h3 class="text-lg font-semibold">
-                                {{ $t("explore.comments") }}
+                                {{ $t("goals.comments") }}
                             </h3>
                             <UButton
                                 icon="i-heroicons-x-mark"
@@ -149,7 +149,7 @@
                                 name="i-heroicons-chat-bubble-left-right"
                                 class="w-12 h-12 mx-auto mb-2 opacity-50"
                             />
-                            <p>{{ $t("explore.noComments") }}</p>
+                            <p>{{ $t("goals.noComments") }}</p>
                         </div>
 
                         <!-- Comments List -->
@@ -174,7 +174,9 @@
                                             comment.user?.username
                                         }}</span>
                                         <span class="text-xs text-gray-500">{{
-                                            formatDate(comment.createdAt)
+                                            formatDateRelative(
+                                                comment.createdAt
+                                            )
                                         }}</span>
                                     </div>
                                     <!-- Edit/Delete for comment owner -->
@@ -245,7 +247,9 @@
                         <div v-if="user" class="flex gap-2">
                             <UTextarea
                                 v-model="newComment"
-                                :placeholder="$t('explore.commentPlaceholder')"
+                                :placeholder="
+                                    String($t('goals.commentPlaceholder'))
+                                "
                                 :rows="2"
                                 class="flex-1"
                             />
@@ -254,7 +258,7 @@
                                 :loading="submittingComment"
                                 :disabled="!newComment.trim()"
                             >
-                                {{ $t("explore.send") }}
+                                {{ $t("goals.send") }}
                             </UButton>
                         </div>
                         <div v-else class="text-center py-2">
@@ -276,6 +280,8 @@
 </template>
 
 <script setup lang="ts">
+import type { GoalComment } from "~/generated/prisma/client";
+
 useHead({
     title: "Explore Dreams - DreamBuddy",
     meta: [
@@ -290,6 +296,7 @@ useHead({
 const { $t } = useI18n();
 const { user } = useAuth();
 const toast = useToast();
+const { formatDateRelative } = useDate();
 
 interface GoalWithDetails {
     id: number;
@@ -562,26 +569,6 @@ const deleteComment = async (commentId: number) => {
     } finally {
         deletingCommentId.value = null;
     }
-};
-
-const formatDate = (date: string | Date) => {
-    let locale: string | undefined = undefined;
-    if (typeof window !== "undefined") {
-        try {
-            const v = localStorage.getItem("dreambuddy-locale");
-            if (v === "th") locale = "th-TH";
-            else if (v === "en") locale = "en-US";
-        } catch (e) {}
-    }
-
-    return new Date(date).toLocaleString(locale, {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-    });
 };
 </script>
 
