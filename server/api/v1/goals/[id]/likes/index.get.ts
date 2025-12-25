@@ -1,0 +1,45 @@
+import { prisma } from "../../../../../utils/prisma";
+import { getCurrentUser } from "../../../../../utils/auth";
+
+export default defineEventHandler(async (event) => {
+    const id = getRouterParam(event, "id");
+    const user = await getCurrentUser(event);
+
+    if (!id) {
+        throw createError({ statusCode: 400, statusMessage: "Missing ID" });
+    }
+
+    const goal = await prisma.goal.findUnique({ where: { id: parseInt(id) } });
+    if (!goal) {
+        throw createError({ statusCode: 404, statusMessage: "Goal not found" });
+    }
+
+    const isOwner = user?.id === goal.ownerId;
+    const isPublic = goal.visibility === "PUBLIC";
+    if (!isOwner && !isPublic) {
+        throw createError({ statusCode: 403, statusMessage: "Forbidden" });
+    }
+
+    const likes = await prisma.goalLike.findMany({
+        where: { goalId: parseInt(id) },
+        include: {
+            user: {
+                select: {
+                    id: true,
+                    name: true,
+                    username: true,
+                    avatarUrl: true,
+                },
+            },
+        },
+        orderBy: { createdAt: "desc" },
+    });
+
+    return likes.map((l) => ({
+        id: l.user.id,
+        name: l.user.name,
+        username: l.user.username,
+        avatarUrl: l.user.avatarUrl,
+        likedAt: l.createdAt,
+    }));
+});

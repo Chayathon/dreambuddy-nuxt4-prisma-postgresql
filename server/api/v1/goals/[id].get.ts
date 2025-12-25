@@ -20,6 +20,11 @@ export default defineEventHandler(async (event) => {
                     avatarUrl: true,
                 },
             },
+            _count: {
+                select: {
+                    comments: true,
+                },
+            },
         },
     });
 
@@ -34,5 +39,9 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 403, statusMessage: "Forbidden" });
     }
 
-    return goal;
+    return {
+        ...goal,
+        commentsCount: goal._count.comments,
+        _count: undefined,
+    };
 });
