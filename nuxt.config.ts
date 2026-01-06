@@ -5,6 +5,25 @@ export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
     devtools: { enabled: true },
     css: ["./app/assets/css/main.css"],
+    runtimeConfig: {
+        // Private keys - ใช้ได้เฉพาะฝั่ง server
+        jwtSecret: process.env.JWT_SECRET || "your-secret-key-change-this",
+        oauth: {
+            google: {
+                clientId: process.env.GOOGLE_CLIENT_ID || "",
+                clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+            },
+            facebook: {
+                clientId: process.env.FACEBOOK_CLIENT_ID || "",
+                clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
+            },
+        },
+        // Public keys - ใช้ได้ทั้งฝั่ง client และ server
+        public: {
+            baseUrl:
+                process.env.NUXT_PUBLIC_BASE_URL || "http://localhost:3000",
+        },
+    },
     modules: [
         "@nuxt/ui",
         [
