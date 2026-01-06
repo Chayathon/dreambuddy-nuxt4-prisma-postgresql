@@ -208,7 +208,7 @@
                                         >
                                         <span
                                             class="text-sm font-semibold text-primary-700 dark:text-primary-300"
-                                            >$95.89/day</span
+                                            >$95.89</span
                                         >
                                     </div>
                                 </div>
