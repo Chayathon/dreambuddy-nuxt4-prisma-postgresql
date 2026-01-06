@@ -33,9 +33,8 @@ export default defineEventHandler(async (event) => {
     }
 
     const isOwner = user?.id === goal.ownerId;
-    const isPublic = goal.visibility === "PUBLIC";
 
-    if (!isOwner && !isPublic) {
+    if (!isOwner) {
         throw createError({ statusCode: 403, statusMessage: "Forbidden" });
     }
 
