@@ -20,19 +20,19 @@
                 color="neutral"
                 class="cursor-pointer"
             >
-                <Icon name="i-heroicons-globe-alt" class="w-5 h-5" />
+                <UIcon name="logos:google-icon" class="size-5" />
                 {{ $t("auth.register.continueWithGoogle") }}
             </UButton>
             <UButton
-                @click="handleSocialRegister('github')"
+                @click="handleSocialRegister('facebook')"
                 block
                 size="lg"
                 variant="outline"
                 color="neutral"
                 class="cursor-pointer"
             >
-                <Icon name="i-heroicons-code-bracket" class="w-5 h-5" />
-                {{ $t("auth.register.continueWithGithub") }}
+                <UIcon name="logos:facebook" class="size-5" />
+                {{ $t("auth.register.continueWithFacebook") }}
             </UButton>
         </div>
 
@@ -179,14 +179,14 @@
                         <span class="text-sm text-gray-700 dark:text-gray-300">
                             {{ $t("auth.register.agreeToTerms") }}
                             <NuxtLink
-                                :to="$localePath('/terms')"
+                                :to="$localePath('/auth/register')"
                                 class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400"
                             >
                                 {{ $t("auth.register.termsOfService") }}
                             </NuxtLink>
                             {{ $t("auth.register.and") }}
                             <NuxtLink
-                                :to="$localePath('/privacy')"
+                                :to="$localePath('/auth/register')"
                                 class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400"
                             >
                                 {{ $t("auth.register.privacyPolicy") }}
@@ -344,8 +344,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 };
 
 const handleSocialRegister = (provider: string) => {
-    // TODO: Implement social register
-    console.log("Register with:", provider);
+    window.location.href = `/api/v1/auth/${provider}/redirect`;
 };
 </script>
 

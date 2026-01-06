@@ -20,19 +20,19 @@
                 color="neutral"
                 class="cursor-pointer"
             >
-                <Icon name="i-heroicons-globe-alt" class="w-5 h-5" />
+                <UIcon name="logos:google-icon" class="size-5" />
                 {{ $t("auth.login.continueWithGoogle") }}
             </UButton>
             <UButton
-                @click="handleSocialLogin('github')"
+                @click="handleSocialLogin('facebook')"
                 block
                 size="lg"
                 variant="outline"
                 color="neutral"
                 class="cursor-pointer"
             >
-                <Icon name="i-heroicons-code-bracket" class="w-5 h-5" />
-                {{ $t("auth.login.continueWithGithub") }}
+                <UIcon name="logos:facebook" class="size-5" />
+                {{ $t("auth.login.continueWithFacebook") }}
             </UButton>
         </div>
 
@@ -229,8 +229,7 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
 };
 
 const handleSocialLogin = (provider: string) => {
-    // TODO: Implement social login
-    console.log("Login with:", provider);
+    window.location.href = `/api/v1/auth/${provider}/redirect`;
 };
 </script>
 
