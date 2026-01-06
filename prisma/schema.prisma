@@ -41,7 +41,7 @@ model User {
   username     String        @unique // ใช้สำหรับ URL โปรไฟล์ /user/:username
   email        String        @unique
   passwordHash String? // ถ้าใช้ OAuth อย่างเดียว อาจเป็น null
-  provider     String? // เช่น "google", "github"
+  provider     String? // เช่น "google", "facebook"
   providerId   String? // id จาก provider ภายนอก
   avatarUrl    String?
   bio          String?
