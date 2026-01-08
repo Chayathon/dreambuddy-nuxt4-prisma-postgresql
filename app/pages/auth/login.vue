@@ -217,10 +217,9 @@ const onSubmit = async (event: FormSubmitEvent<Schema>) => {
     } catch (error: any) {
         toast.add({
             title: String($t("auth.login.errorTitle") || "Error"),
-            description:
-                error.data?.statusMessage ||
-                error.message ||
-                String($t("auth.login.errorMessage") || "Login failed"),
+            description: String(
+                $t("auth.login.errorMessage") || "Invalid Email or Password"
+            ),
             color: "error",
         });
     } finally {
