@@ -113,7 +113,6 @@
 <script setup lang="ts">
 import { z } from "zod";
 import type { FormSubmitEvent } from "#ui/types";
-import { S } from "vue-router/dist/router-CWoNjPRp.mjs";
 const { $t, $localePath } = useI18n();
 
 definePageMeta({

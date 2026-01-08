@@ -152,7 +152,6 @@ import type { FormSubmitEvent } from "@nuxt/ui";
 
 const { $t, $localePath } = useI18n();
 const toast = useToast();
-const router = useRouter();
 
 definePageMeta({
     layout: "auth",
