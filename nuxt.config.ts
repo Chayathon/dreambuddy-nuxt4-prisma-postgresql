@@ -7,7 +7,7 @@ export default defineNuxtConfig({
     css: ["./app/assets/css/main.css"],
     runtimeConfig: {
         // Private keys - ใช้ได้เฉพาะฝั่ง server
-        jwtSecret: process.env.JWT_SECRET || "your-secret-key-change-this",
+        jwtSecret: process.env.JWT_SECRET || "your-secret-key",
         oauth: {
             google: {
                 clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -18,6 +18,9 @@ export default defineNuxtConfig({
                 clientSecret: process.env.FACEBOOK_CLIENT_SECRET || "",
             },
         },
+        emailUser: process.env.EMAIL_USER || "",
+        emailPass: process.env.EMAIL_PASS || "",
+
         // Public keys - ใช้ได้ทั้งฝั่ง client และ server
         public: {
             baseUrl:
