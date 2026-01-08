@@ -307,7 +307,7 @@
       "successTitle": "สำเร็จ",
       "successMessage": "เข้าสู่ระบบสำเร็จ",
       "errorTitle": "ข้อผิดพลาด",
-      "errorMessage": "การเข้าสู่ระบบล้มเหลว"
+      "errorMessage": "อีเมลหรือรหัสผ่านไม่ถูกต้อง"
     },
     "register": {
       "title": "สร้างบัญชี",
@@ -350,7 +350,35 @@
       "checkEmail": "ตรวจสอบอีเมลของคุณ",
       "emailSent": "เราได้ส่งลิงก์รีเซ็ตรหัสผ่านไปยัง",
       "instructions": "คลิกลิงก์ในอีเมลเพื่อรีเซ็ตรหัสผ่านของคุณ หากคุณไม่เห็นอีเมล ให้ตรวจสอบในโฟลเดอร์สแปม",
-      "resendEmail": "ส่งอีเมลอีกครั้ง"
+      "resendEmail": "ส่งอีเมลอีกครั้ง",
+      "invalidEmail": "ที่อยู่อีเมลไม่ถูกต้อง",
+      "successTitle": "สำเร็จ",
+      "successMessage": "ส่งลิงก์รีเซ็ตรหัสผ่านสำเร็จแล้ว",
+      "errorTitle": "ข้อผิดพลาด",
+      "errorMessage": "ไม่พบที่อยู่อีเมลนี้ในระบบ",
+      "nonEmailUserMessage": "การรีเซ็ตรหัสผ่านใช้ได้เฉพาะกับผู้ใช้ที่ลงทะเบียนผ่านอีเมล/รหัสผ่านเท่านั้น"
+    },
+    "resetPassword": {
+      "title": "ตั้งรหัสผ่านใหม่",
+      "subtitle": "กรอกรหัสผ่านใหม่สำหรับบัญชีของคุณ",
+      "newPassword": "รหัสผ่านใหม่",
+      "newPasswordLabel": "รหัสผ่านใหม่",
+      "newPasswordPlaceholder": "กรอกรหัสผ่านใหม่ของคุณ",
+      "confirmNewPassword": "ยืนยันรหัสผ่านใหม่",
+      "confirmNewPasswordLabel": "ยืนยันรหัสผ่านใหม่",
+      "confirmNewPasswordPlaceholder": "ยืนยันรหัสผ่านใหม่ของคุณ",
+      "resetPassword": "รีเซ็ตรหัสผ่าน",
+      "resetPasswordButton": "รีเซ็ตรหัสผ่าน",
+      "passwordTooShort": "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร",
+      "passwordsDoNotMatch": "รหัสผ่านไม่ตรงกัน",
+      "successTitle": "สำเร็จ",
+      "successMessage": "รีเซ็ตรหัสผ่านสำเร็จแล้ว",
+      "errorTitle": "ข้อผิดพลาด",
+      "errorMessage": "การรีเซ็ตรหัสผ่านล้มเหลว",
+      "noTokenTitle": "กรุณาขอรับลิงก์รีเซ็ตรหัสผ่าน",
+      "noTokenMessage": "ไม่มีคำขอรีเซ็ตรหัสผ่าน กรุณาขอรับลิงก์รีเซ็ตรหัสผ่านใหม่",
+      "invalidTokenTitle": "คำขอไม่ถูกต้องหรือหมดอายุ",
+      "invalidTokenMessage": "คำขอรีเซ็ตรหัสผ่านไม่ถูกต้องหรือหมดอายุ กรุณาขอรับลิงก์รีเซ็ตรหัสผ่านใหม่"
     }
   }
 }

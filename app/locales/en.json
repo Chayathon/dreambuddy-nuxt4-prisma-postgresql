@@ -307,7 +307,7 @@
       "successTitle": "Success",
       "successMessage": "Logged in successfully",
       "errorTitle": "Error",
-      "errorMessage": "Login failed"
+      "errorMessage": "Invalid Email or Password"
     },
     "register": {
       "title": "Create Account",
@@ -350,7 +350,35 @@
       "checkEmail": "Check your email",
       "emailSent": "We sent a password reset link to",
       "instructions": "Click the link in the email to reset your password. If you don't see the email, check your spam folder.",
-      "resendEmail": "Resend email"
+      "resendEmail": "Resend email",
+      "invalidEmail": "Invalid email address",
+      "successTitle": "Success",
+      "successMessage": "Password reset link sent",
+      "errorTitle": "Error",
+      "errorMessage": "No account found with that email",
+      "nonEmailUserMessage": "Password reset is only available for users registered via email/password"
+    },
+    "resetPassword": {
+      "title": "Set New Password",
+      "subtitle": "Enter your new password below",
+      "newPassword": "New password",
+      "newPasswordLabel": "New Password",
+      "newPasswordPlaceholder": "Enter your new password",
+      "confirmNewPassword": "Confirm new password",
+      "confirmNewPasswordLabel": "Confirm New Password",
+      "confirmNewPasswordPlaceholder": "Confirm your new password",
+      "resetPassword": "Reset password",
+      "resetPasswordButton": "Reset Password",
+      "passwordTooShort": "Password must be at least 6 characters",
+      "passwordsDoNotMatch": "Passwords do not match",
+      "successTitle": "Success",
+      "successMessage": "Password reset successfully",
+      "errorTitle": "Error",
+      "errorMessage": "Failed to reset password",
+      "noTokenTitle": "Please request a Password reset link",
+      "noTokenMessage": "No password reset request. Please request a password reset link.",
+      "invalidTokenTitle": "Invalid or Expired request",
+      "invalidTokenMessage": "The password reset request is invalid or has expired. Please request a new password reset link."
     }
   }
 }
