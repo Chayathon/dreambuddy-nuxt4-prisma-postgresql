@@ -27,22 +27,22 @@ const sendResetPasswordMail = async (email: string, token: string) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Reset Your Password</title>
             </head>
-            <body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6;">
+            <body style="margin: 0; padding: 0; font-family: Inter, Anuphan, sans-serif; background-color: #f4f7f6;">
                 <table role="presentation" style="width: 100%; border-collapse: collapse;">
                     <tr>
                         <td align="center" style="padding: 40px 0;">
                             <table role="presentation" style="width: 600px; border-collapse: collapse; background-color: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                                 <!-- Header -->
                                 <tr>
-                                    <td style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 40px 30px; text-align: center; border-radius: 12px 12px 0 0;">
-                                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">🌟 DreamBuddy</h1>
-                                        <p style="margin: 10px 0 0 0; color: #d1fae5; font-size: 14px;">Make Your Dreams Come True</p>
+                                        <td style="background-color: #ffffff; padding: 40px 30px; text-align: center; border-radius: 12px 12px 0 0;">
+                                        <h1 style="margin: 0; font-size: 28px; font-weight: 600; background: linear-gradient(135deg, #00FF5A 0%, #2563eb 100%); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block;">🌟 DreamBuddy</h1>
+                                        <p style="margin: 10px 0 0 0; color: #047857; font-size: 14px;">Make Your Dreams Come True</p>
                                     </td>
                                 </tr>
                                 
                                 <!-- Content -->
                                 <tr>
-                                    <td style="padding: 40px 30px;">
+                                    <td style="padding: 30px;">
                                         <h2 style="margin: 0 0 20px 0; color: #047857; font-size: 24px; font-weight: 600;">Reset Your Password</h2>
                                         <p style="margin: 0 0 20px 0; color: #374151; font-size: 16px; line-height: 1.6;">
                                             Hello there! 👋
@@ -61,13 +61,6 @@ const sendResetPasswordMail = async (email: string, token: string) => {
                                                 </td>
                                             </tr>
                                         </table>
-                                        
-                                        <p style="margin: 30px 0 20px 0; color: #6b7280; font-size: 14px; line-height: 1.6;">
-                                            Or copy and paste this link into your browser:
-                                        </p>
-                                        <p style="margin: 0 0 20px 0; padding: 12px; background-color: #f0fdf4; border-left: 4px solid #10b981; color: #047857; font-size: 14px; word-break: break-all; border-radius: 4px;">
-                                            ${resetPasswordUrl}
-                                        </p>
                                         
                                         <div style="margin: 30px 0 0 0; padding: 20px; background-color: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px;">
                                             <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.6;">
