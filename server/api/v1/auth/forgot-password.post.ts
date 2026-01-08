@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    if (user.provider !== null || user.providerId !== null) {
+    if (user.passwordHash === null || user.passwordHash === "") {
         throw createError({
             statusCode: 400,
             statusMessage: "Users not registered via email/password",
